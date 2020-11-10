@@ -1,0 +1,25 @@
+<h1><%= @sub.title %></h1>
+
+<% if current_user.id == @sub.moderator_id %>
+    <form action="<%= sub_url(@sub) %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Sub">
+    </form>
+    <form action="<%= edit_sub_url(@sub) %>" method="GET">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" value="Edit Sub">
+    </form>
+<% end %>
+
+<h4><%= @sub.description %></h4>
+
+<a href="<%= new_post_url %>">Make a new post!</a>
+
+<ul>
+    <% @sub.posts.each do |post|%>
+        <li>test
+            <a href="<%= post_url(post)%>"><%= post.title %></a>
+        </li>
+    <% end %>
+</ul>
